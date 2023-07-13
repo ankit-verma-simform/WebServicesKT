@@ -10,11 +10,12 @@ import UIKit
 class UserListingVC: UIViewController {
     // MARK: - Variables
     private lazy var viewModel = UserListingViewModel()
+    var coordinator: UserListingCoordinator?
     
     // MARK: - IB Outlets
     @IBOutlet private weak var tblUsers: UITableView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     // MARK: - View Lifecycle Methods
     override func viewDidLoad() {
@@ -50,12 +51,7 @@ extension UserListingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let clickedUser = viewModel.users.value[indexPath.row]
-        guard let vc = storyboard?.instantiateViewController(
-            withIdentifier: UserProfileVC.identifier) as? UserProfileVC else {
-            return
-        }
-        vc.user = clickedUser
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator?.gotoUserProfileScreen(of: clickedUser)
     }
 }
 
@@ -84,6 +80,7 @@ extension UserListingVC: UISearchBarDelegate {
 // MARK: - Functions
 extension UserListingVC {
     private func initialSetup() {
+        navigationItem.setHidesBackButton(true, animated: false)
         setupTableView()
         setupActivityIndicator()
         viewModel.loadUsers()

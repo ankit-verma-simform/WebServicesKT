@@ -10,19 +10,22 @@ import Foundation
 enum RequestType {
     case getUsers(page: Int, perPage: Int = 6, delay: Int = 0)
     case updateProfile(userId: Int)
+    case login
 }
 
 extension RequestType: Endpoint {
     var baseUrl: String {
-        return "https://reqres.in/api"
+        return "https://reqres.in/api/"
     }
     
     var path: String {
         switch self {
         case .getUsers(let page, let perPage, let delay):
-            return "/users?page=\(page)&per_page=\(perPage)&delay=\(delay)"
+            return "users?page=\(page)&per_page=\(perPage)&delay=\(delay)"
         case .updateProfile(userId: let userId):
-            return "/users/\(userId)"
+            return "users/\(userId)"
+        case .login:
+            return "login"
         }
     }
     
@@ -36,6 +39,8 @@ extension RequestType: Endpoint {
             return .get
         case .updateProfile:
             return .patch
+        case .login:
+            return .post
         }
     }
     
@@ -45,7 +50,7 @@ extension RequestType: Endpoint {
     
     var headers: [String : String]? {
         switch self {
-        case .updateProfile:
+        case .updateProfile, .login:
             return [
                 "Accept":"application/json",
                 "Content-Type":"application/json"

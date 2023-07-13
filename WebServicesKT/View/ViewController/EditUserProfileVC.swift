@@ -11,6 +11,7 @@ import SPIndicator
 class EditUserProfileVC: UIViewController {
     // MARK: - Variables
     var user: User?
+    var coordinator: EditUserProfileCoordinator?
     private lazy var viewModel = EditUserProfileViewModel()
 
     // MARK: - IB Outlets
@@ -23,6 +24,7 @@ class EditUserProfileVC: UIViewController {
     @IBOutlet private weak var tvBio: UITextView!
     @IBOutlet private weak var btnChangePassword: UIButton!
     
+    // MARK: - View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
@@ -32,14 +34,14 @@ class EditUserProfileVC: UIViewController {
 // MARK: - Functions
 extension EditUserProfileVC {
     private func initialSetup() {
-        imgProfile.makeRounded()
-        btnCamera.makeRounded()
-        btnChangePassword.addBorder()
-        setupNavbar()
         guard let user else {
             return
         }
         configureUserData(with: user)
+        imgProfile.makeRounded()
+        btnCamera.makeRounded()
+        btnChangePassword.addBorder()
+        setupNavbar()
     }
     
     private func setupNavbar() {
@@ -71,7 +73,7 @@ extension EditUserProfileVC {
                 } else {
                     SPIndicator.present(title: "Update Failed!", preset: .error)
                 }
-                self.navigationController?.popViewController(animated: true)
+                self.coordinator?.finish()
             }
         }
     }

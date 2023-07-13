@@ -16,11 +16,15 @@ struct _R {
   let reuseIdentifier = reuseIdentifier()
 
   var color: color { .init(bundle: bundle) }
+  var image: image { .init(bundle: bundle) }
   var info: info { .init(bundle: bundle) }
   var nib: nib { .init(bundle: bundle) }
   var storyboard: storyboard { .init(bundle: bundle) }
 
   func color(bundle: Foundation.Bundle) -> color {
+    .init(bundle: bundle)
+  }
+  func image(bundle: Foundation.Bundle) -> image {
     .init(bundle: bundle)
   }
   func info(bundle: Foundation.Bundle) -> info {
@@ -47,6 +51,14 @@ struct _R {
 
     /// Color `AccentColor`.
     var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
+  }
+
+  /// This `_R.image` struct is generated, and contains static references to 1 images.
+  struct image {
+    let bundle: Foundation.Bundle
+
+    /// Image `sparkles`.
+    var sparkles: RswiftResources.ImageResource { .init(name: "sparkles", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
   /// This `_R.info` struct is generated, and contains static references to 1 properties.
@@ -91,7 +103,6 @@ struct _R {
             let bundle: Foundation.Bundle
             var uiSceneConfigurationName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneConfigurationName") ?? "Default Configuration" }
             var uiSceneDelegateClassName: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneDelegateClassName") ?? "$(PRODUCT_MODULE_NAME).SceneDelegate" }
-            var uiSceneStoryboardFile: String { bundle.infoDictionaryString(path: ["UIApplicationSceneManifest", "UISceneConfigurations", "UIWindowSceneSessionRoleApplication"], key: "UISceneStoryboardFile") ?? "Main" }
           }
         }
       }
@@ -148,21 +159,22 @@ struct _R {
     }
 
     /// Storyboard `Main`.
-    struct main: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
-      typealias InitialController = UIKit.UINavigationController
-
+    struct main: RswiftResources.StoryboardReference {
       let bundle: Foundation.Bundle
 
       let name = "Main"
 
       var editUserProfileVC: RswiftResources.StoryboardViewControllerIdentifier<EditUserProfileVC> { .init(identifier: "EditUserProfileVC", storyboard: name, bundle: bundle) }
+      var loginVC: RswiftResources.StoryboardViewControllerIdentifier<LoginVC> { .init(identifier: "LoginVC", storyboard: name, bundle: bundle) }
       var userListingVC: RswiftResources.StoryboardViewControllerIdentifier<UserListingVC> { .init(identifier: "UserListingVC", storyboard: name, bundle: bundle) }
       var userProfileVC: RswiftResources.StoryboardViewControllerIdentifier<UserProfileVC> { .init(identifier: "UserProfileVC", storyboard: name, bundle: bundle) }
 
       func validate() throws {
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "camera") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'camera' is used in storyboard 'Main', but couldn't be loaded.") } }
+        if UIKit.UIImage(named: "sparkles", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'sparkles' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIColor(named: "AccentColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentColor' is used in storyboard 'Main', but couldn't be loaded.") }
         if editUserProfileVC() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'editUserProfileVC' could not be loaded from storyboard 'Main' as 'EditUserProfileVC'.") }
+        if loginVC() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'loginVC' could not be loaded from storyboard 'Main' as 'LoginVC'.") }
         if userListingVC() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'userListingVC' could not be loaded from storyboard 'Main' as 'UserListingVC'.") }
         if userProfileVC() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'userProfileVC' could not be loaded from storyboard 'Main' as 'UserProfileVC'.") }
       }
