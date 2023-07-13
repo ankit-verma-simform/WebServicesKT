@@ -10,6 +10,7 @@ import UIKit
 class UserProfileVC: UIViewController {
     // MARK: - Variables
     var user: User?
+    var coordinator: UserProfileCoordinator?
     
     // MARK: - IB Outlets
     @IBOutlet private weak var btnLogout: UIButton!
@@ -22,6 +23,13 @@ class UserProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+    }
+}
+
+// MARK: - IB Actions
+extension UserProfileVC {
+    @IBAction func btnLogoutClicked(_ sender: Any) {
+        coordinator?.logoutUser()
     }
 }
 
@@ -51,12 +59,7 @@ extension UserProfileVC {
     }
     
     @objc private func editProfileButtonClicked() {
-        guard let vc = storyboard?.instantiateViewController(
-            withIdentifier: EditUserProfileVC.identifier) as? EditUserProfileVC else {
-            return
-        }
-        vc.user = user
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator?.gotoEditUserProfileScreen()
     }
     
     private func styleProfileImage() {
