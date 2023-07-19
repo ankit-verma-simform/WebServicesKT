@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  WebServicesKT
+
+  Created by Ankit Verma on 19/07/23.
+  
+*/
+
+"loginFailed" = "Login Failed!";
+"loginSuccess" = "Login Success!";
+"software" = "Software";
+"supportReqres" = "Support Reqres!";
+"updateSuccess" = "Updated Successfully!";
+"updateFailed" = "Update Failed!";
+"editUserProfileTitle" = "Edit Profile";
+"userProfileTitle" = "Profile";
