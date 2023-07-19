@@ -8,6 +8,7 @@
 import Foundation
 
 class UserListingViewModel {
+    // MARK: - Variables
     private (set) var users = LiveData([User]())
     private (set) var currentPage = LiveData(0)
     private (set) var totalPages = LiveData(0)
@@ -15,6 +16,7 @@ class UserListingViewModel {
     private (set) var isSearching = LiveData(false)
     private var usersFromApi = [User]() // caches latest api results
     
+    // MARK: - Functions
     func loadUsers() {
         loadUsersFromApi()
     }
@@ -34,15 +36,17 @@ class UserListingViewModel {
     private func loadUsersFromApi() {
         isLoadingData.value = true
         currentPage.value += 1
-        APIManager.shared.request(.getUsers(page: currentPage.value, perPage: 5, delay: 2)) { [weak self] (result: Swift.Result<UserList, NetworkError>) in
+        APIManager.shared.request(.getUsers(page: currentPage.value,
+                                            perPage: 5,
+                                            delay: 2)) { [weak self] (result: Swift.Result<UserList, NetworkError>) in
             guard let self else {
                 return
             }
             
             switch result {
             case .failure(let error):
-                self.currentPage.value -= 1
                 print(error)
+                self.currentPage.value -= 1
             case .success(let userList):
                 print(userList)
                 self.users.value += userList.users

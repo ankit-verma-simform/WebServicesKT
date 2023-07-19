@@ -1,0 +1,9 @@
+/* 
+  AppConstants.strings
+  WebServicesKT
+
+  Created by Ankit Verma on 19/07/23.
+  
+*/
+
+"serverBaseUrl" = "https://reqres.in/api/";

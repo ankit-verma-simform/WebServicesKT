@@ -11,7 +11,7 @@ import SPIndicator
 class LoginVC: UIViewController {
     // MARK: - Variables
     var coordinator: LoginCoordinator?
-    let viewModel = LoginViewModel()
+    private let viewModel = LoginViewModel()
     
     // MARK: - IB Outlets
     @IBOutlet private weak var imgMain: UIImageView!
@@ -38,6 +38,7 @@ extension LoginVC {
                 return
             }
             DispatchQueue.main.async {
+                self.resetLoginForm()
                 switch loginState {
                 case .success(let token):
                     self.coordinator?.gotoUserListingScreen()
@@ -58,10 +59,15 @@ extension LoginVC {
     }
     
     private func showLoginFailedNotification(with errorMessage: String? = nil) {
-        SPIndicator.present(title: "Login Failed!", message: errorMessage, preset: .error)
+        SPIndicator.present(title: R.string.localizable.loginFailed(), message: errorMessage, preset: .error)
     }
     
     private func showLoginSuccessNotification(with message: String) {
-        SPIndicator.present(title: "Login Success!", message: message, preset: .done)
+        SPIndicator.present(title: R.string.localizable.loginSuccess(), message: message, preset: .done)
+    }
+    
+    private func resetLoginForm() {
+        tfEmail.text = ""
+        tfPassword.text = ""
     }
 }
