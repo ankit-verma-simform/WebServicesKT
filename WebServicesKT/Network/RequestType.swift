@@ -15,7 +15,7 @@ enum RequestType {
 
 extension RequestType: Endpoint {
     var baseUrl: String {
-        return "https://reqres.in/api/"
+        return R.string.appConstants.serverBaseUrl()
     }
     
     var path: String {

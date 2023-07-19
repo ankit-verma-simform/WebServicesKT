@@ -12,7 +12,7 @@ enum LoginState {
 }
 
 class LoginViewModel {
-    
+    // MARK: - Functions
     func login(email: String, password: String, completionHandler: @escaping (LoginState) -> Void) {
         let loginRequest = LoginRequest(email: email, password: password)
         APIManager.shared.request(.login, body: loginRequest) {
