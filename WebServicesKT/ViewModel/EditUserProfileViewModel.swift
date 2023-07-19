@@ -6,6 +6,7 @@
 //
 
 class EditUserProfileViewModel {
+    // MARK: - Functions
     func saveProfile(withUserId userId: Int,
                      saveUserRequest: SaveUserRequest,
                      completionHandler: @escaping (Bool) -> Void) {

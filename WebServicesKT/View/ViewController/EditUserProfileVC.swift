@@ -45,7 +45,7 @@ extension EditUserProfileVC {
     }
     
     private func setupNavbar() {
-        navigationItem.title = "Edit Profile"
+        navigationItem.title = R.string.localizable.editUserProfileTitle() 
         let saveButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"),
                                          style: .plain, target: self, action: #selector(saveProfileButtonClicked))
         saveButton.tintColor = UIColor.black
@@ -69,9 +69,9 @@ extension EditUserProfileVC {
             }
             DispatchQueue.main.async {
                 if profileUpdated {
-                    SPIndicator.present(title: "Updated Profile!", preset: .done)
+                    SPIndicator.present(title: R.string.localizable.updateSuccess(), preset: .done)
                 } else {
-                    SPIndicator.present(title: "Update Failed!", preset: .error)
+                    SPIndicator.present(title: R.string.localizable.updateFailed(), preset: .error)
                 }
                 self.coordinator?.finish()
             }
@@ -82,8 +82,8 @@ extension EditUserProfileVC {
         tfFirstName.text = user.firstName
         tfLastName.text = user.lastName
         tfEmail.text = user.email
-        tfJob.text = "Software"
-        tvBio.text = "Support Reqres!"
+        tfJob.text = R.string.localizable.software()
+        tvBio.text = R.string.localizable.supportReqres()
         imgProfile.kf.setImage(with: URL(string: user.avatar))
     }
 }

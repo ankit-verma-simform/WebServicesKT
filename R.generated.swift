@@ -15,12 +15,22 @@ struct _R {
 
   let reuseIdentifier = reuseIdentifier()
 
+  var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
   var color: color { .init(bundle: bundle) }
   var image: image { .init(bundle: bundle) }
   var info: info { .init(bundle: bundle) }
   var nib: nib { .init(bundle: bundle) }
   var storyboard: storyboard { .init(bundle: bundle) }
 
+  func string(bundle: Foundation.Bundle) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: nil)
+  }
+  func string(locale: Foundation.Locale) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: locale)
+  }
+  func string(preferredLanguages: [String], locale: Locale? = nil) -> string {
+    .init(bundle: bundle, preferredLanguages: preferredLanguages, locale: locale)
+  }
   func color(bundle: Foundation.Bundle) -> color {
     .init(bundle: bundle)
   }
@@ -43,6 +53,103 @@ struct _R {
 
   struct project {
     let developmentRegion = "en"
+  }
+
+  /// This `_R.string` struct is generated, and contains static references to 2 localization tables.
+  struct string {
+    let bundle: Foundation.Bundle
+    let preferredLanguages: [String]?
+    let locale: Locale?
+    var appConstants: appConstants { .init(source: .init(bundle: bundle, tableName: "AppConstants", preferredLanguages: preferredLanguages, locale: locale)) }
+    var localizable: localizable { .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale)) }
+
+    func appConstants(preferredLanguages: [String]) -> appConstants {
+      .init(source: .init(bundle: bundle, tableName: "AppConstants", preferredLanguages: preferredLanguages, locale: locale))
+    }
+    func localizable(preferredLanguages: [String]) -> localizable {
+      .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale))
+    }
+
+
+    /// This `_R.string.appConstants` struct is generated, and contains static references to 1 localization keys.
+    struct appConstants {
+      let source: RswiftResources.StringResource.Source
+
+      /// Value: https://reqres.in/api/
+      ///
+      /// Key: serverBaseUrl
+      var serverBaseUrl: RswiftResources.StringResource { .init(key: "serverBaseUrl", tableName: "AppConstants", source: source, developmentValue: nil, comment: nil) }
+    }
+
+    /// This `_R.string.localizable` struct is generated, and contains static references to 13 localization keys.
+    struct localizable {
+      let source: RswiftResources.StringResource.Source
+
+      /// Value: DELETE
+      ///
+      /// Key: delete
+      var delete: RswiftResources.StringResource { .init(key: "delete", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Edit Profile
+      ///
+      /// Key: editUserProfileTitle
+      var editUserProfileTitle: RswiftResources.StringResource { .init(key: "editUserProfileTitle", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: GET
+      ///
+      /// Key: get
+      var get: RswiftResources.StringResource { .init(key: "get", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Login Failed!
+      ///
+      /// Key: loginFailed
+      var loginFailed: RswiftResources.StringResource { .init(key: "loginFailed", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Login Success!
+      ///
+      /// Key: loginSuccess
+      var loginSuccess: RswiftResources.StringResource { .init(key: "loginSuccess", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: PATCH
+      ///
+      /// Key: patch
+      var patch: RswiftResources.StringResource { .init(key: "patch", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: POST
+      ///
+      /// Key: post
+      var post: RswiftResources.StringResource { .init(key: "post", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: PUT
+      ///
+      /// Key: put
+      var put: RswiftResources.StringResource { .init(key: "put", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Software
+      ///
+      /// Key: software
+      var software: RswiftResources.StringResource { .init(key: "software", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Support Reqres!
+      ///
+      /// Key: supportReqres
+      var supportReqres: RswiftResources.StringResource { .init(key: "supportReqres", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Update Failed!
+      ///
+      /// Key: updateFailed
+      var updateFailed: RswiftResources.StringResource { .init(key: "updateFailed", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Updated Successfully!
+      ///
+      /// Key: updateSuccess
+      var updateSuccess: RswiftResources.StringResource { .init(key: "updateSuccess", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+
+      /// Value: Profile
+      ///
+      /// Key: userProfileTitle
+      var userProfileTitle: RswiftResources.StringResource { .init(key: "userProfileTitle", tableName: "Localizable", source: source, developmentValue: nil, comment: nil) }
+    }
   }
 
   /// This `_R.color` struct is generated, and contains static references to 1 colors.

@@ -50,7 +50,7 @@ extension UserProfileVC {
     }
     
     private func customizeNavbar() {
-        navigationItem.title = "Profile"
+        navigationItem.title = R.string.localizable.userProfileTitle()
         let editButton = UIBarButtonItem(image: UIImage(systemName: "pencil"),
                                          style: .plain, target: self, action: #selector(editProfileButtonClicked))
         editButton.tintColor = UIColor.black
@@ -69,7 +69,7 @@ extension UserProfileVC {
     private func configureUserData(with user: User) {
         lblUsername.text = "\(user.firstName) \(user.lastName)"
         lblEmail.text = user.email
-        lblBio.text = "Support Reqres!"
+        lblBio.text = R.string.localizable.supportReqres()
         imgProfile.kf.setImage(with: URL(string: user.avatar))
     }
 }
